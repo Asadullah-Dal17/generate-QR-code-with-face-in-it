@@ -28,7 +28,7 @@ def faceDetection (Image):
         LinThickness =1
 
         """Drawing Normal Rectangle which Opencv ROI of face"""
-        # cv.rectangle(Image, (x, y), (x+w, y+h), YELLOW, LinThickness)
+        cv.rectangle(Image, (x, y), (x+w, y+h), YELLOW, LinThickness)
         """ Increasing the face area here """
         # cv.rectangle(Image, (x-wPadding, y-hPadding), (x+w+wPadding, y+h+hPadding), GREEN, 10)
         mask = np.zeros(Image.shape, dtype = np.uint8)
@@ -41,46 +41,44 @@ def faceDetection (Image):
         """ Calculating the Radius of Circle"""
         Radius = (wPadding+int(h/2))
         """ Drwaing Circle on the image """
-        # cv.circle(Image, (cCX, ccY), Radius, (WHITE),2)
+        cv.circle(Image, (cCX, ccY), Radius, (WHITE),2)
         
         """Creating Circle on the Mask on oder to write image"""
         cv.circle(mask, (cCX, ccY), Radius, (WHITE),cv.FILLED)
         
         " show the Circle filled mask"
-        # cv.imshow("Filled Circle", mask)
+        cv.imshow("Filled Circle", mask)
         
         
         # """Writing face area on the Mask using Bitwise_and operator from opnecv""" 
         ROI = cv.bitwise_and(Image, mask)
         "Written face ROI"
-        # cv.imshow("Faces written on Complete Mask ", ROI)
+        cv.imshow("Faces written on Complete Mask ", ROI)
         # converting mask into GrayScale image 
         mask = cv.cvtColor(mask, cv.COLOR_BGR2GRAY)
         
         # croping the max rectangle area 
         cropedRectFace= ROI[y-hPadding: y+h+hPadding, x-wPadding: x+wPadding+w]
-        # cv.imshow('Cropped Rectangle', cropedRectFace)
+        cv.imshow('Cropped Rectangle', cropedRectFace)
         
         # Cropping the mask as well 
         mask = mask[y-hPadding: y+h+hPadding, x-wPadding: x+wPadding+w]
         
         # change the Pixel Color where they are black around face cropped reactangle face in it
-        cropedRectFace[mask==0] = (255,255,255)
+        cropedRectFace[mask==0] = YELLOW
    
         cv.imshow("Final Result",cropedRectFace)
     return cropedRectFace 
 
 # Create QRCode Function 
 def CreateQRCode(Logo, data, Version=1):
-    LogoSize = (100,100)
+    LogoSize = (60,60)
     Logo.thumbnail(LogoSize)
 
     # Setting parametter of QR Code 
     QR_Code = qrcode.QRCode(
     version=Version,
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
+    error_correction=qrcode.constants.ERROR_CORRECT_H
 )
     QR_Code.add_data(data)
     # create QR_Code
@@ -88,7 +86,7 @@ def CreateQRCode(Logo, data, Version=1):
     # QR_Code.make_image(fill_color="green", back_color="white")
     #converting the QR code in RGB Image 
     RGB_QR_Image = QR_Code.make_image().convert("RGB")
-    print(RGB_QR_Image.size[0])
+    # print(RGB_QR_Image.size[0])
     # Define center postion for Logo
     Position = ((RGB_QR_Image.size[0]-Logo.size[0])//2, (RGB_QR_Image.size[1]- Logo.size[1])//2)
    
@@ -124,7 +122,7 @@ for file in fileList:
     FileNames=file.split(".")
     data =FileNames[0]
     # calling the function Create QR code
-    CreateQRCode(PIL_Image, data, 5)
+    CreateQRCode(PIL_Image, data)
 
     # converting image into Pillow  image format
     # cv.imshow("outPutImage", Out_image)
