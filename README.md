@@ -4,6 +4,9 @@ This code will detect the face in the image and and crop the face in circular ar
 You can create different version of QR code using this code 
 read about version here: https://www.qrcode.com/en/about/version.html
 
+## Qrcode offical Site 
+http://omz-software.com/pythonista/docs/ios/qrcode.html
+
 
 # Install python module require:
 --------------------------------
@@ -15,4 +18,5 @@ read about version here: https://www.qrcode.com/en/about/version.html
 
   pip3 install -r requirements.txt
 
-
+### Youtube Video
+Code Explanation https://www.youtube.com/watch?v=a1fVxW942ZQ&t=805s
