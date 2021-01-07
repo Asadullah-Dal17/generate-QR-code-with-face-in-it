@@ -28,7 +28,7 @@ def faceDetection (Image):
         LinThickness =1
 
         """Drawing Normal Rectangle which Opencv ROI of face"""
-        cv.rectangle(Image, (x, y), (x+w, y+h), YELLOW, LinThickness)
+        # cv.rectangle(Image, (x, y), (x+w, y+h), YELLOW, LinThickness)
         """ Increasing the face area here """
         # cv.rectangle(Image, (x-wPadding, y-hPadding), (x+w+wPadding, y+h+hPadding), GREEN, 10)
         mask = np.zeros(Image.shape, dtype = np.uint8)
@@ -41,7 +41,7 @@ def faceDetection (Image):
         """ Calculating the Radius of Circle"""
         Radius = (wPadding+int(h/2))
         """ Drwaing Circle on the image """
-        cv.circle(Image, (cCX, ccY), Radius, (WHITE),2)
+        # cv.circle(Image, (cCX, ccY), Radius, (WHITE),2)
         
         """Creating Circle on the Mask on oder to write image"""
         cv.circle(mask, (cCX, ccY), Radius, (WHITE),cv.FILLED)
