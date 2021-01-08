@@ -1,3 +1,10 @@
+'''
+AUTHOR: Asadullah Dal
+Company Name: AiPhile
+purpose: Youtube Channel 
+Channel URL: https://youtube.com/c/aiphile
+
+'''
 import PIL
 import cv2 as cv
 import numpy as np
@@ -17,6 +24,15 @@ haarDetector = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 # Creating face detector Function 
 
 def faceDetection (Image):
+    #function Disrcption 
+    ''' 
+    This Function take image(Mat) as argument, detects face, crop's the circular area of detect face,
+    with some padding applied, returns a rectangle area of face with some color filed around the area between circle and rectangle
+
+    :param Image:  Take image(Mat) as only argument
+
+    :return: rectangle with circular face in it.
+    '''
     # converting image into GrayScale image  
     grayImage = cv.cvtColor(Image, cv.COLOR_BGR2GRAY)
     # found face are 
@@ -27,10 +43,13 @@ def faceDetection (Image):
         hPadding = int(h/3.4)
         LinThickness =1
 
-        """Drawing Normal Rectangle which Opencv ROI of face"""
+        """Drawing Normal Rectangle which provided by Opencv ROI of face"""
         # cv.rectangle(Image, (x, y), (x+w, y+h), YELLOW, LinThickness)
-        """ Increasing the face area here """
+        """ Increasing the face area here
+        by adding the padding around the orginal ROI of face from right, left, top and bottom, in order
+        to crop more area of face """
         # cv.rectangle(Image, (x-wPadding, y-hPadding), (x+w+wPadding, y+h+hPadding), GREEN, 10)
+        # creating the empty image using numpy 
         mask = np.zeros(Image.shape, dtype = np.uint8)
         # cv.imshow("empty Mask", mask)
         
@@ -70,8 +89,19 @@ def faceDetection (Image):
         cv.imshow("Final Result",cropedRectFace)
     return cropedRectFace 
 
-# Create QRCode Function 
+# Create QRCode Function
+# """" 
 def CreateQRCode(Logo, data, Version=1):
+    #Function Discrption 
+    '''
+    This Function create a QR code and paste(add) logo in the center of image
+    This function tacks three arguments
+
+    :param Logo(image): This image tack PIL image as first argument 
+    :param data: data that can be written on the QR code 
+    :param Version: this argument by default is one, but you can specify from 1 to 40
+     which will define how big the QR code should be, its depends on the data as well 
+    '''
     LogoSize = (60,60)
     Logo.thumbnail(LogoSize)
 
@@ -79,7 +109,8 @@ def CreateQRCode(Logo, data, Version=1):
     QR_Code = qrcode.QRCode(
     version=Version,
     error_correction=qrcode.constants.ERROR_CORRECT_H
-)
+)   
+    data2="https://www.youtube.com/c/aiphile"
     QR_Code.add_data(data)
     # create QR_Code
     QR_Code.make()

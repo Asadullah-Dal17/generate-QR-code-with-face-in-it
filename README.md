@@ -18,5 +18,20 @@ http://omz-software.com/pythonista/docs/ios/qrcode.html
 
   pip3 install -r requirements.txt
 
+## Results:
+Scan this:
+<br>
+<br/>
+Data: = https://www.youtube.com/c/aiphile
+<br>
+<br/>
+<img src="src/QR_Asadullah.png" width="400"/>
+
+
+## Output 
+<br>
+<br/>
+<img src="src/preview.gif"/>
+
 ### Youtube Video
 Code Explanation https://www.youtube.com/watch?v=a1fVxW942ZQ&t=805s
